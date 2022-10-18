@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
 # “你帮我助”物资交换软件v1.0
+# @Time : 2022.10.5.
+# @Author : 徐可懿
 
 # 打印每行时通用的格式化
 fmt = "{0:{4}<6}\t{1:{4}<6}\t{2:{4}<6}\t{3:<10}"
@@ -43,32 +45,32 @@ while choice != 'Quit':
         print('请根据提示依次输入要删除的物品名称，持有者联系电话')
         goods = input('物品名称： ')
         tele = input('联系电话： ')
-        is_finded = False
+        is_found = False
         # 将文件逐行读取并存于lines中，以便找到对应信息后将整行删去
         with open("goods_data.txt", "r", encoding="utf-8") as f:
             lines = f.readlines()
             # print(lines)
         with open("goods_data.txt", "w", encoding="utf-8") as f_w:
             for line in lines:
-                if not is_finded and line.split()[0] == goods and line.split()[3] == tele:
-                    is_finded = True
+                if not is_found and line.split()[0] == goods and line.split()[3] == tele:
+                    is_found = True
                     continue
                 f_w.write(line)
-            if is_finded:
+            if is_found:
                 print('已删除')
             else:
                 print('未找到对应信息，无法删除')
     elif choice == 'Print':
         Print_List()
     elif choice == 'Search':
-        is_finded = False
+        is_found = False
         goods = input('请输入您想要寻找的物品名称： ')
         with open("goods_data.txt", encoding='utf-8') as data:
             for line in data:
                 if line.split()[0] == goods:
-                    is_finded = True
+                    is_found = True
                     print(fmt.format(line.split()[0], line.split()[1], line.split()[2], line.split()[3], chr(12288)))
-            if not is_finded:
+            if not is_found:
                 print('未找到对应信息')
     elif choice == 'Help':
         print(help)
